@@ -104,13 +104,11 @@ var _ = require("lodash");
 
 
 let schema = {
-	a: Joi.any().required(),
-	b: Joi.any(),
-	c: Joi.any().when("b", {is: Joi.any(), then: Joi.required()})
+	lonlat: Joi.array().ordered(Joi.number().min(-180).max(180).required(), Joi.number().min(-90).max(90).required()).required()
 };
 
 let checkObj = {
-	a: "CCC"
+	lonlat: [179,89,20]
 };
 
 let results1 = Joi.validate(checkObj, schema);
