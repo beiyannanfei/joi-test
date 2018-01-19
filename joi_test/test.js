@@ -103,12 +103,21 @@ var _ = require("lodash");
 // console.log(results1.error.details[0].message);//"other" is required
 
 
-let schema = {
-	lonlat: Joi.array().ordered(Joi.number().min(-180).max(180).required(), Joi.number().min(-90).max(90).required()).required()
-};
+/*let schema = {
+ lonlat: Joi.array().ordered(Joi.number().min(-180).max(180).required(), Joi.number().min(-90).max(90).required()).required()
+ };
+
+ let checkObj = {
+ lonlat: [179,89,20]
+ };*/
 
 let checkObj = {
-	lonlat: [179,89,20]
+	// oPwd: "1234",
+	nPwd: "1234"
+};
+let schema = {
+	oPwd: Joi.string().required(),
+	nPwd: Joi.string().invalid(checkObj.oPwd || "").required()
 };
 
 let results1 = Joi.validate(checkObj, schema);

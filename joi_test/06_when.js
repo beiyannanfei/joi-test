@@ -5,6 +5,19 @@
 const language = "en";
 const Joi = language == "en" ? require("joi") : require("./language_cn.js");
 
+let user = {
+	roles: "admin"
+};
+let schema = {
+	a: Joi.valid('a', 'b', 'other'),
+	b: Joi.boolean().when(user.roles, {is: "admin", then: Joi.required()}),
+};
+let obj1 = {
+	a: "other"
+};
+let results1 = Joi.validate(obj1, schema);
+console.log(results1);
+
 function when1() {
 	let schema = {
 		a: Joi.valid('a', 'b', 'other'),
